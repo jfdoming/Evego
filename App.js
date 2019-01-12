@@ -1,11 +1,12 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-
+import Backend from './backend';
 export default class App extends React.Component {
   render() {
+    const data = await Backend.getEvents();
     return (
       <View style={styles.container}>
-        <Text>Hello World! :)</Text>
+        <Text>{data}</Text>
       </View>
     );
   }

@@ -15,7 +15,8 @@ export default class Backend {
             return body;
             if (error) {
                 console.error(error);
-            });
+            }
+        });
     }
     createEvent(latitude, longitude, name, emoji, category, startTime, description) {
         return request.post(ip + "/event", {
