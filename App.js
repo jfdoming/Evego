@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import Backend from './backend';
 export default class App extends React.Component {
   render() {
-    const data = await Backend.getEvents();
+    const data = Backend.getEvents();
     return (
       <View style={styles.container}>
         <Text>{data}</Text>
