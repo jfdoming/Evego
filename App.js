@@ -19,9 +19,6 @@ export default class App extends React.Component {
     })
   }
   render() {
-<<<<<<< HEAD
-    const data = Backend.getEvents();
-=======
     if (this.state.isLoading) {
       return (
         <View style="[{flex: 1, padding: 20}]>">
@@ -29,7 +26,6 @@ export default class App extends React.Component {
         </View>
       )
     }
->>>>>>> 849e9764b0a9b4efdb120291688f8b22bfae653f
     return (
       <>
         <MapCmp></MapCmp>
