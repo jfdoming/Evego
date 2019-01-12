@@ -1,10 +1,9 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import MapCmp from './MapCmp';
-import FetchView from './FetchView';
+import { Text, View } from 'react-native';
 import { getEvents } from './backend';
 
 export default class App extends React.Component {
+
   constructor(props) {
     super(props);
     this.state = { isLoading: true }
@@ -20,11 +19,17 @@ export default class App extends React.Component {
     })
   }
   render() {
+    if (this.state.isLoading) {
+      return (
+        <View style={{flex: 1, padding: 20}}>
+          <Text style={{color: "red"}}>Loading...</Text>
+        </View>
+      );
+    }
     return (
-      <>
-        <MapCmp/>
-        <FetchView/>
-      </>
+      <View style={{flex: 1, paddingTop: 20}}>
+        <Text>{JSON.stringify(this.state.dataSource)}</Text>
+      </View>
     );
   }
 }
