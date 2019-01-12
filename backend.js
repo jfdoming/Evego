@@ -2,7 +2,7 @@ import request from 'request'
 const ip = '34.235.94.25';
 // Usage: import Backend from './backend.js'
 //    getEvents() returns all events as json list
-//    createEvent(latitude,longitude,name,emoji,category) returns event id
+//    createEvent(latitude,longitude,name,emoji,category,startTime,description) returns event id
 //    goingToEvent(eventID) returns 200 or 404 if event not found
 export default class Backend {
     getEvents() {
@@ -17,14 +17,16 @@ export default class Backend {
                 console.error(error);
             });
     }
-    createEvent(latitude, longitude, name, emoji, category) {
+    createEvent(latitude, longitude, name, emoji, category, startTime, description) {
         return request.post(ip + "/event", {
             json: {
                 "lat": latitude,
                 "long": longitude,
                 "name": name,
                 "emoji": emoji,
-                "category": category
+                "category": category,
+                "time": startTime,
+                "description": description
             }
         },
             function (error, response, body) {
