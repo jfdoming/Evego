@@ -1,57 +1,56 @@
-import request from 'request'
-const ip = '34.235.94.25';
+const ip = 'http://34.235.94.25:80';
 // Usage: import Backend from './backend.js'
 //    getEvents() returns all events as json list
 //    createEvent(latitude,longitude,name,emoji,category,startTime,description) returns event id
 //    goingToEvent(eventID) returns 200 or 404 if event not found
-export default class Backend {
-    getEvents() {
-        return request.get(ip, (error, resonse, body) => {
-            if (error) {
-                console.error(error);
-                return error;
-            }
-            console.log("Got Data:", response.body);
-            return body;
-            if (error) {
-                console.error(error);
-            }
+export function getEvents() {
+    return fetch(ip).then((response) => response.json())
+        .then((responseJson) => {
+            console.log("RESPONSE", responseJson)
+            return responseJson;
+        }).catch((error) => {
+            console.error(error);
         });
-    }
-    createEvent(latitude, longitude, name, emoji, category, startTime, description) {
-        return request.post(ip + "/event", {
-            json: {
-                "lat": latitude,
-                "long": longitude,
-                "name": name,
-                "emoji": emoji,
-                "category": category,
-                "time": startTime,
-                "description": description
-            }
+}
+
+export function createEvent(latitude, longitude, name, emoji, category, startTime, description) {
+    return fetch(ip + "/event", {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
         },
-            function (error, response, body) {
-                if (error) {
-                    console.error(error);
-                    return error;
-                }
-                if (!error && response.statusCode == 200) {
-                    return body;
-                }
-            })
+        body: {
+            "lat": latitude,
+            "long": longitude,
+            "name": name,
+            "emoji": emoji,
+            "category": category,
+            "time": startTime,
+            "description": description
+        }
     }
-    goingToEvent(eventID) {
-        return request.post(ip + "/going", {
-            json: {
-                "id": eventID
-            }
+    ).then((response) => response.json())
+        .then((responseJson) => {
+            return responseJson;
+        }).catch((error) => {
+            console.error(error);
+        });
+}
+export function goingToEvent(eventID) {
+    return fetch(ip + "/going", {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
         },
-            function (error, response, body) {
-                if (error) {
-                    console.log(error);
-                    return error;
-                }
-                return body;
-            })
-    }
+        body: {
+            "id": eventID
+        }
+    }).then((response) => response.json())
+        .then((responseJson) => {
+            return responseJson;
+        }).catch((error) => {
+            console.error(error);
+        });
 }
