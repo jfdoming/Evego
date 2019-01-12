@@ -38,7 +38,7 @@ yarn-error.log
 
 #Custom
 package-lock.json
-.expo
+.expo/
 
 # BUCK
 buck-out/
