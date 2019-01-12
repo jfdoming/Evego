@@ -1,50 +1,39 @@
-import React, { Component } from 'react';
-import { Alert, AppRegistry, Platform, StyleSheet, Text, TouchableHighlight, TouchableOpacity, TouchableNativeFeedback, TouchableWithoutFeedback, View } from 'react-native';
 
-export default class Touchables extends Component {
-  _onPressButton() {
-    Alert.alert('You tapped the button!')
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import MapCmp from './MapCmp';
+import { getEvents } from './backend';
+export default class App extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = { isLoading: true }
   }
+  componentDidMount() {
+    return getEvents().then((jsonData) => {
+      this.setState({
+        isLoading: false,
+        dataSource: jsonData,
+      }, function () {
 
-  _onLongPressButton() {
-    Alert.alert('You long-pressed the button!')
+      });;
+    })
   }
-
-
   render() {
+    if (this.state.isLoading) {
+      return (
+        <View style="[{flex: 1, padding: 20}]>">
+          <Text>Loading...</Text>
+        </View>
+      )
+    }
     return (
-      <View style={styles.container}>
-	<Text> Hello</Text>
-        <TouchableHighlight onPress={this._onPressButton} underlayColor="white">
-	 <View style={styles.button}>
-            <Text style={styles.buttonText}>TouchableHighlight</Text>
-          </View>
-        </TouchableHighlight>
-        <TouchableOpacity onPress={this._onPressButton}>
-          <View style={styles.button}>
-            <Text style={styles.buttonText}>TouchableOpacity</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableNativeFeedback
-            onPress={this._onPressButton}
-            background={Platform.OS === 'android' ? TouchableNativeFeedback.SelectableBackground() : ''}>
-          <View style={styles.button}>
-            <Text style={styles.buttonText}>TouchableNativeFeedback</Text>
-          </View>
-        </TouchableNativeFeedback>
-        <TouchableWithoutFeedback
-            onPress={this._onPressButton}
-            >
-          <View style={styles.button}>
-            <Text style={styles.buttonText}>TouchableWithoutFeedback</Text>
-          </View>
-        </TouchableWithoutFeedback>
-        <TouchableHighlight onPress={this._onPressButton} onLongPress={this._onLongPressButton} underlayColor="white">
-          <View style={styles.button}>
-            <Text style={styles.buttonText}>Touchable with Long Press</Text>
-          </View>
-        </TouchableHighlight>
-      </View>
+      <>
+        <MapCmp></MapCmp>
+        <View style={{ flex: 1, paddingTop: 20 }}>
+          <Text>{JSON.stringify(this.state.dataSource)}</Text>
+        </View>
+      </>
     );
   }
 }
@@ -66,5 +55,3 @@ const styles = StyleSheet.create({
   }
 });
 
-// skip this line if using Create React Native App
-AppRegistry.registerComponent('AwesomeProject', () => Touchables);
