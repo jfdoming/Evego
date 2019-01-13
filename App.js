@@ -22,7 +22,12 @@ export class HomeScreen extends React.Component {
 class DetailsScreen extends React.Component {
   constructor(props) {
     super(props);
+  
+    this.state = {
+      buttonColor: 'red',
+    };
   }
+
   
   render() {
     return (
@@ -53,7 +58,7 @@ class DetailsScreen extends React.Component {
           title="screaming for 1 minute"
           color={this.state.buttonColor4}
           onPress={() => {
-            this.setState({ buttonColor: 'blue' }); 
+            this.setState({ buttonColor4: 'blue' }); 
           }}
         />
       </View>
