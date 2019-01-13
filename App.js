@@ -10,30 +10,51 @@ export class HomeScreen extends React.Component {
     super(props);
     this.state = { isLoading: true }
   }
-  
   render() {
     return (
       <>
         <MapCmp></MapCmp>
-	<Button
- 	 onPress={() => {
-	    Alert.alert('You tapped the button!');
-	  }}
- 	 title="Press Me ya"
-	/>
       </>
     );
   }
 }
 
 class DetailsScreen extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  
   render() {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Details Screen</Text>
+        <Text>Preferences</Text>
         <Button
-          title="Go to Details... again"
-          onPress={() => this.props.navigation.navigate('List View')}
+          title="sports"
+          color={this.state.buttonColor1}
+          onPress={() => {
+            this.setState({ buttonColor1: 'blue' }); 
+          }}
+        />
+        <Button
+          title="geese"
+          color={this.state.buttonColor2}
+          onPress={() => {
+            this.setState({ buttonColor2: 'blue' }); 
+          }}
+        />
+        <Button
+          title="snowball fight"
+          color={this.state.buttonColor3}
+          onPress={() => {
+            this.setState({ buttonColor3: 'blue' }); 
+          }}
+        />
+        <Button
+          title="screaming for 1 minute"
+          color={this.state.buttonColor4}
+          onPress={() => {
+            this.setState({ buttonColor: 'blue' }); 
+          }}
         />
       </View>
     );
@@ -55,6 +76,7 @@ class ListScreen extends React.Component {
 }
 
 
+
 const TabNavigator = createBottomTabNavigator({
   'List View': ListScreen,
   Home: HomeScreen,
@@ -63,6 +85,8 @@ const TabNavigator = createBottomTabNavigator({
     initialRouteName: 'Home'});
 
 export default createAppContainer(TabNavigator);
+
+
 
 const styles = StyleSheet.create({
   container: {
