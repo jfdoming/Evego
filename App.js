@@ -10,30 +10,11 @@ export class HomeScreen extends React.Component {
     super(props);
     this.state = { isLoading: true }
   }
-  componentDidMount() {
-    return getEvents().then((jsonData) => {
-      this.setState({
-        isLoading: false,
-        dataSource: jsonData,
-      }, function () {
-
-      });;
-    })
-  }
+  
   render() {
-    if (this.state.isLoading) {
-      return (
-        <View style="[{flex: 1, padding: 20}]>">
-          <Text>Loading...</Text>
-        </View>
-      )
-    }
     return (
       <>
         <MapCmp></MapCmp>
-        <View style={{ flex: 1, paddingTop: 20 }}>
-          <Text>{JSON.stringify(this.state.dataSource)}</Text>
-        </View>
 	<Button
  	 onPress={() => {
 	    Alert.alert('You tapped the button!');
@@ -91,6 +72,8 @@ const styles = StyleSheet.create({
   button: {
     marginBottom: 30,
     width: 260,
+    flex: 1,
+    backgroundColor: '#aaa',
     alignItems: 'center',
     backgroundColor: '#2196F3'
   },
