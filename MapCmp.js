@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, ActivityIndicator, StyleSheet } from 'react-native';
 import { MapView } from 'expo';
 Marker = MapView.Marker;
 import { getEvents } from './backend';
@@ -63,10 +63,8 @@ export default class MapCmp extends React.Component {
   };
   render() {
     if (!this.state.loaded) {
-      return (<View>
-        <Text>
-          Loading...
-        </Text>
+      return (<View style={[styles.container, styles.horizontal]}>
+        <ActivityIndicator size={200} color="#0000ff" />
       </View>)
     }
     console.log("render:", this.state.location)
@@ -96,3 +94,14 @@ export default class MapCmp extends React.Component {
     );
   }
 }
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center'
+  },
+  horizontal: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    padding: 10
+  }
+});
