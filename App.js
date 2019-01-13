@@ -18,7 +18,7 @@ export class MapScreen extends React.Component {
     this.setState({ forceUpdate: !this.state.forceUpdate })
   }
   showInfoCard = (id) => {
-    this.setState({ infoId: id })
+    this.setState({ infoId: id });
   }
   componentDidUpdate() {
     //   if (this.props.navigation.state.params.refresh) {
@@ -41,9 +41,9 @@ export class MapScreen extends React.Component {
           <InfoCard id={this.state.infoId} />
         </View>
         <ActionButton
-          buttonColor="rgba(69,69,69,0.8)"
+          buttonColor="black"
+          buttonTextStyle={{ color: "#F5D21D" }}
           onPress={() => this.props.navigation.navigate('Event')}
-          hideShadow={false}
         />
 
 

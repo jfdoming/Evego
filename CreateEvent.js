@@ -158,7 +158,7 @@ export default class CreateEvent extends React.Component {
                               this.setState({ time: getDateString(date) });
                             })
                         }}
-                        title="Pick Time"
+                        title="Choose a time"
                         color="#000000"
                     />
                 </View>

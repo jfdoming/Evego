@@ -36,15 +36,12 @@ export default class MapCmp extends React.Component {
     notificationStream((event) => {
       if (this.state.status === 'granted') {
         console.log("new event:", event);
-        Expo.Notifications.presentLocalNotificationAsync({title: event.name, body: event.description})
-        this.state.markers.push(this.parsePointData(event));
-        this.setState({ markers: this.state.markers });
+        Expo.Notifications.presentLocalNotificationAsync({title: event.name, body: event.description});
       } else {
         console.log('no perms for notification')
-        this.state.markers.push(this.parsePointData(event));
-        this.setState({ markers: this.state.markers });
-        this.forceUpdate();
       }
+      this.state.markers.push(this.parsePointData(event));
+      this.setState({ markers: this.state.markers });
     });
   }
 
