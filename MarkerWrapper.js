@@ -3,7 +3,7 @@ import { Text, View } from 'react-native';
 import { Callout } from 'react-native-maps';
 import { getEventDetails } from "./backend";
 import { getTimeUntil } from "./datetime";
-import WhatTheFuck from "./whatthefuck";
+
 export default class MarkerWrapper extends React.Component {
   constructor(props) {
     super(props);
@@ -19,10 +19,10 @@ export default class MarkerWrapper extends React.Component {
             key={marker.id}
             coordinate={marker.coordinate}
             onPress={() => {
-              this.setState({openCallout: marker.id});
+              this.props.showInfoCard(marker.id);
             }}
           >
-            <Text style={{ fontSize: 20 }}>{marker.emoji + (c === mid)}</Text>
+            <Text style={{ fontSize: 20 }}>{marker.emoji}</Text>
           </Marker>
         );
       })}

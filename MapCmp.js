@@ -32,6 +32,10 @@ export default class MapCmp extends React.Component {
   onRegionChange = (region) => {
     this.setState({ location: region });
   }
+  
+  shouldComponentUpdate() {
+    return !this.state.loaded;
+  }
 
   parsePointData(data) {
     return {
@@ -93,8 +97,9 @@ export default class MapCmp extends React.Component {
             latitudeDelta: 0.0922,
             longitudeDelta: 0.0421,
           }}
+          onPress={() => this.props.showInfoCard(-1)}
         >
-          <MarkerWrapper markers={this.state.markers}/>
+          <MarkerWrapper showInfoCard={this.props.showInfoCard} markers={this.state.markers}/>
         </MapView>
         <View style={styles.actions}>
           <FloatingActionButton style={{ position: 'absolute' }}

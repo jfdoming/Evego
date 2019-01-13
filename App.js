@@ -3,26 +3,28 @@ import { StyleSheet, Text, View, Button, Alert, StatusBar } from 'react-native';
 import MapCmp from './MapCmp';
 import { getEvents } from './backend';
 import { createBottomTabNavigator, createAppContainer } from "react-navigation";
+import InfoCard from "./InfoCard";
 
 export class HomeScreen extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { isLoading: true }
+    this.state = { isLoading: true, infoId: -1 }
+  }
+  
+  showInfoCard = (id) => {
+    this.setState({infoId: id})
   }
 
   render() {
     return (
-      <>
+      <View style={{display: "flex", flexFlow: "column", height: "100%"}}>
         <StatusBar hidden />
-        <MapCmp></MapCmp>
-        <Button
-          onPress={() => {
-            Alert.alert('You tapped the button!');
-          }}
-          title="Press Me ya"
-        />
-      </>
+        <View style={{position: "relative", flexGrow: 1, flexShrink: 1, flexBasis: "auto", zIndex: -1}}>
+          <MapCmp showInfoCard={this.showInfoCard}></MapCmp>
+          <InfoCard id={this.state.infoId}/>
+        </View>
+      </View>
     );
   }
 }
