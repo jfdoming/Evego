@@ -1,5 +1,6 @@
 const ip = 'http://34.235.94.25:80';
 const goingEvents = [];
+import SocketIOClient from 'socket.io-client';
 // Usage: import Backend from './backend.js'
 //    getEvents() returns all events as json list
 //    createEvent(latitude,longitude,name,emoji,category,startTime,description) returns event id
@@ -12,7 +13,10 @@ export function getEvents() {
             console.log(error);
         });
 }
-
+export function notificationStream(callback) {
+    let socket = SocketIOClient('http://34.235.94.25:3000');
+    socket.on('event', callback);
+}
 export function getEventDetails(eventID) {
     return fetch(ip + "/info", {
         method: 'POST',

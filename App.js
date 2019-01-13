@@ -15,7 +15,6 @@ export class MapScreen extends React.Component {
   }
 
   ud() {
-    console.log("wtf")
     this.setState({ forceUpdate: !this.state.forceUpdate })
   }
   showInfoCard = (id) => {
@@ -42,8 +41,9 @@ export class MapScreen extends React.Component {
           <InfoCard id={this.state.infoId} />
         </View>
         <ActionButton
-          buttonColor="rgba(231,76,60,1)"
+          buttonColor="rgba(69,69,69,0.6)"
           onPress={() => this.props.navigation.navigate('Event')}
+          hideShadow={false}
         />
 
 
@@ -153,8 +153,10 @@ const TabNavigator = createBottomTabNavigator({
       },
     }),
     tabBarOptions: {
-      activeTintColor: 'tomato',
-      inactiveTintColor: 'gray',
+      activeTintColor: '#F5D21D',
+      inactiveTintColor: '#AAAAAA',
+      inactiveBackgroundColor: '#000000',
+      activeBackgroundColor: '#000000'
     },
   });
 

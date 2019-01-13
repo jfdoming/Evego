@@ -3,7 +3,7 @@ import { Text, View, ActivityIndicator, StyleSheet } from 'react-native';
 import { Callout } from 'react-native-maps';
 import { MapView } from 'expo';
 Marker = MapView.Marker;
-import { getEvents } from './backend';
+import { getEvents, notificationStream } from './backend';
 import CreateEvent from './CreateEvent';
 //import { Exponent } from 'expo';
 import { Constants, Location, Permissions } from 'expo';
@@ -32,12 +32,24 @@ export default class MapCmp extends React.Component {
       loaded: false,
       add: false
     };
+
+    notificationStream((event) => {
+      if (this.state.status === 'granted') {
+        console.log("new event:", event);
+        Expo.Notifications.presentLocalNotificationAsync(<Text>{event}</Text>)
+        this.state.markers.push(this.parsePointData(event));
+        this.setState({ markers: this.state.markers });
+      } else {
+        console.log('no perms for notification')
+        this.state.markers.push(this.parsePointData(event));
+        this.setState({ markers: this.state.markers });
+      }
+    });
   }
 
   onRegionChange = (region) => {
     this.setState({ location: region });
   }
-
   shouldComponentUpdate() {
     return !this.state.loaded;
   }
@@ -70,6 +82,8 @@ export default class MapCmp extends React.Component {
 
   getLocationAsync = async () => {
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
+    // let { statusStatus } = await Permissions.askAsync(Permissions.REMOTE_NOTIFICATIONS);
+    this.setState({ status: 'no' });
     if (status !== 'granted') {
       this.setState({
         location: { latitude: 20, longitude: -40 },

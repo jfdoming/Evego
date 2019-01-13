@@ -49,18 +49,20 @@ export default class MarkerCallout extends React.Component {
           borderRadius: 20
         }}
           onPress={() => {
-            if (!isGoing(this.state.data.id)) {
-              goingToEvent(this.state.data.id);
-              this.state.data.going++;
-            } else {
-              notGoingToEvent(this.state.data.id);
-              this.state.data.going--;
+            if (this.state.data) {
+              if (!isGoing(this.state.data.id)) {
+                goingToEvent(this.state.data.id);
+                this.state.data.going++;
+              } else {
+                notGoingToEvent(this.state.data.id);
+                this.state.data.going--;
+              }
+              this.setState({ going: isGoing(this.state.data.id) })
             }
-            this.setState({ going: isGoing(this.state.data.id) })
           }}>
           <Text>{this.state.going ? "I'm not going" : "I'm Going!"}</Text>
         </TouchableOpacity>
-        <Text style={{ borderRadius: 10, backgroundColor: "grey", color: "white", width: "auto", padding: 5, textAlign: "center" }}>{this.state.data.category}</Text>
+        <Text style={{ borderRadius: 10, backgroundColor: "grey", color: "white", width: "auto", padding: 5, textAlign: "center", marginTop: 10 }}>{this.state.data.category}</Text>
       </>
     );
   }

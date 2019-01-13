@@ -24,6 +24,13 @@ export default class CreateEvent extends React.Component {
     }
     static navigationOptions = {
         headerTitle: 'Make an Event',
+        header: navigation => ({
+            titleStyle: {
+                color: '#FFFFFF'
+            },
+            tintColor: '#F5D21D'
+        })
+
     };
     componentDidMount() {
         this.getLocationAsync();
@@ -140,7 +147,7 @@ export default class CreateEvent extends React.Component {
                             })
                         }}
                         title="Pick Time"
-                        color="#841584"
+                        color="#000000"
                     />
                 </View>
                 <View style={{ marginTop: 25, marginLeft: 50, marginRight: 50 }}>
@@ -148,7 +155,7 @@ export default class CreateEvent extends React.Component {
 
                         onPress={() => { this.setState({ chooseLocation: true }) }}
                         title="Choose location"
-                        color="#841584"
+                        color="#000000"
                     />
                 </View>
                 <View style={{ marginTop: 50, marginLeft: 50, marginRight: 50 }}>
@@ -156,7 +163,7 @@ export default class CreateEvent extends React.Component {
 
                         onPress={() => { this.create() }}
                         title="Create!"
-                        color="#841584"
+                        color="#000000"
                     />
                 </View>
             </View >
