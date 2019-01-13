@@ -21,7 +21,8 @@ export default class MapCmp extends React.Component {
   
   parsePointData(data) {
     return {
-      title: data.emoji,
+      emoji: data.emoji,
+      title: "",
       description: "",
       id: data.id,
       coordinate: {
@@ -77,7 +78,7 @@ export default class MapCmp extends React.Component {
               title={marker.title}
               description={marker.description}
             >
-              <Text style={{ fontSize: 20 }}>😉</Text>
+              <Text style={{ fontSize: 20 }}>{marker.emoji}</Text>
             </Marker>
           );
         })}
