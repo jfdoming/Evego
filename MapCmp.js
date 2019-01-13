@@ -5,12 +5,16 @@ import { MapView } from 'expo';
 Marker = MapView.Marker;
 import { getEvents } from './backend';
 import CreateEvent from './CreateEvent';
+//import { Exponent } from 'expo';
 import { Constants, Location, Permissions } from 'expo';
 import MarkerCallout from "./MarkerCallout";
 import MarkerWrapper from "./MarkerWrapper";
 
 import { Ionicons } from '@expo/vector-icons';
 import FloatingActionButton from 'react-native-floating-action-button';
+import Icon from 'react-native-vector-icons/Ionicons';
+
+
 const actions = [{
   text: 'Create Event',
   icon: require('./images/add.png'),
@@ -25,7 +29,8 @@ export default class MapCmp extends React.Component {
       isLoading: true,
       markers: [],
       location: { latitude: 0, longitude: 0 },
-      loaded: false
+      loaded: false,
+      add: false
     };
   }
 
@@ -86,6 +91,13 @@ export default class MapCmp extends React.Component {
         </View>
       );
     }
+    console.log(this.state)
+    if (this.state.add) {
+      return (<CreateEvent callback={() => {
+        console.log("here");
+        this.setState({ add: false })
+      }} />);
+    }
     console.log("render:", this.state.location)
     return (
       <>
@@ -101,18 +113,6 @@ export default class MapCmp extends React.Component {
         >
           <MarkerWrapper showInfoCard={this.props.showInfoCard} markers={this.state.markers}/>
         </MapView>
-        <View style={styles.actions}>
-          <FloatingActionButton style={{ position: 'absolute' }}
-            iconName="plus"
-            iconType="feather"
-            iconColor="white"
-            backgroundColor="#C3C3C3"
-            textDisable
-            onPress={() => {
-              console.log("onPress :O");
-            }}
-          />
-        </View>
       </>
     );
   }
