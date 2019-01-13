@@ -7,7 +7,7 @@ export default class InfoCard extends React.Component {
     super(props);
     
     this.state = {
-      slideAnim: new Animated.Value(-230),
+      slideAnim: new Animated.Value(-250),
       lastId: -1
     }
   }
@@ -22,7 +22,7 @@ export default class InfoCard extends React.Component {
       Animated.timing(
         this.state.slideAnim,
         {
-          toValue: -230,
+          toValue: -250,
           duration: 500,
         }
       ).start();
@@ -39,7 +39,7 @@ export default class InfoCard extends React.Component {
     }
     
     return (
-      <Animated.View style={{backgroundColor: "transparent", width: "100%", height: "35%", padding: 10, position: "absolute", bottom: slideAnim, left: 0}}>
+      <Animated.View style={{backgroundColor: "transparent", width: "100%", height: "40%", padding: 10, position: "absolute", bottom: slideAnim, left: 0}}>
         <View style={{elevation: 20, backgroundColor: "white", borderRadius: 10, width: "100%", height: "100%", padding: 20}}>
           <MarkerCallout id={calloutId}/>
         </View>
