@@ -24,12 +24,10 @@ export default class CreateEvent extends React.Component {
     }
     static navigationOptions = {
         headerTitle: 'Make an Event',
-        header: navigation => ({
-            titleStyle: {
-                color: '#FFFFFF'
-            },
-            tintColor: '#F5D21D'
-        })
+        //headerTintColor: '#F5D21D',
+        headerStyle: {
+            backgroundColor: '#F5D21D'
+        },
 
     };
     componentDidMount() {
@@ -96,10 +94,23 @@ export default class CreateEvent extends React.Component {
                         <Picker.Item label="Category" value="category" />
                         <Picker.Item label="Sports" value="sports" />
                         <Picker.Item label="Technology" value="tech" />
+                        <Picker.Item label="Films" value="films" />
+                        <Picker.Item label="Novels" value="novels" />
+                        <Picker.Item label="Astronomy" value="astronomy" />
+                        <Picker.Item label="Board Games" value="board-games" />
+                        <Picker.Item label="Video Games" value="video-games" />
+                        <Picker.Item label="Environment" value="environment" />
+                        <Picker.Item label="Business" value="business" />
+                        <Picker.Item label="Art" value="art" />
+                        <Picker.Item label="Science" value="science" />
+                        <Picker.Item label="Food" value="food" />
+
+
+
                     </Picker>
                     <View style={styles.button}>
                         <Button
-                            color="#841584"
+                            color="#000000"
                             title={"Emoji: " + this.state.emoji}
                             onPress={() => { this.setState({ emojiTime: true }) }}>
                             <Text></Text>
