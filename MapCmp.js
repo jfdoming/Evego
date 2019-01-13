@@ -28,7 +28,7 @@ export default class MapCmp extends React.Component {
     this.state = {
       isLoading: true,
       markers: [],
-      location: { latitude: 0, longitude: 0 },
+      location: { latitude: 44.05724341765843, longitude: -78.1502691283822 },
       loaded: false,
       add: false
     };
@@ -37,7 +37,7 @@ export default class MapCmp extends React.Component {
   onRegionChange = (region) => {
     this.setState({ location: region });
   }
-  
+
   shouldComponentUpdate() {
     return !this.state.loaded;
   }
@@ -60,7 +60,6 @@ export default class MapCmp extends React.Component {
       this.setState({
         isLoading: false,
         markers: jsonData.map(obj => {
-          console.log(this.parsePointData(obj))
           return this.parsePointData(obj);
         })
       }, function () {
@@ -68,7 +67,7 @@ export default class MapCmp extends React.Component {
       });
     })
   }
-  
+
   getLocationAsync = async () => {
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
     if (status !== 'granted') {
@@ -78,11 +77,11 @@ export default class MapCmp extends React.Component {
       });
       return;
     }
-    
+
     let location = await Location.getCurrentPositionAsync({});
     this.setState({ location: location.coords, loaded: true });
   };
-  
+
   render() {
     if (!this.state.loaded) {
       return (
@@ -91,17 +90,15 @@ export default class MapCmp extends React.Component {
         </View>
       );
     }
-    console.log(this.state)
     if (this.state.add) {
       return (<CreateEvent callback={() => {
-        console.log("here");
         this.setState({ add: false })
       }} />);
     }
-    console.log("render:", this.state.location)
     return (
       <>
         <MapView
+          renderToHardwareTextureAndroid={true}
           style={{ flex: 1 }}
           region={{
             latitude: this.state.location.latitude,
@@ -111,7 +108,7 @@ export default class MapCmp extends React.Component {
           }}
           onPress={() => this.props.showInfoCard(-1)}
         >
-          <MarkerWrapper showInfoCard={this.props.showInfoCard} markers={this.state.markers}/>
+          <MarkerWrapper showInfoCard={this.props.showInfoCard} markers={this.state.markers} />
         </MapView>
       </>
     );

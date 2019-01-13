@@ -24,6 +24,7 @@
     "react-native-floating-action-button": "0.0.6",
     "react-native-material-menu": "^0.4.2",
     "react-native-material-ripple": "^0.8.0",
+    "react-native-modal-datetime-picker": "^6.0.0",
     "react-native-paper": "^2.4.0",
     "react-native-popup-menu": "^0.14.2",
     "react-native-randombytes": "^2.3.0",

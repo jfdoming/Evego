@@ -18,7 +18,6 @@ export default class TopBar extends React.Component {
     }
 
     render() {
-        console.log(this.props);
         if (this.state.loading) {
             return (<Text>Loading</Text>)
         }
