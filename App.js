@@ -27,7 +27,6 @@ class DetailsScreen extends React.Component {
       buttonColor: 'red',
     };
   }
-
   
   render() {
     return (
@@ -80,8 +79,6 @@ class ListScreen extends React.Component {
   }
 }
 
-
-
 const TabNavigator = createBottomTabNavigator({
   'List View': ListScreen,
   Home: HomeScreen,
@@ -90,8 +87,6 @@ const TabNavigator = createBottomTabNavigator({
     initialRouteName: 'Home'});
 
 export default createAppContainer(TabNavigator);
-
-
 
 const styles = StyleSheet.create({
   container: {
@@ -111,4 +106,3 @@ const styles = StyleSheet.create({
     color: 'white'
   }
 });
-
