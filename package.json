@@ -8,11 +8,15 @@
   },
   "dependencies": {
     "crypto-browserify": "^3.12.0",
+    "emoji-mart": "^2.9.2",
     "expo": "^32.0.0",
     "expo-google-sign-in": "^2.0.0",
+    "native-base": "^2.10.0",
     "react": "16.5.0",
     "react-native": "^0.57.1",
+    "react-native-action-button": "^2.8.5",
     "react-native-crypto": "^2.1.2",
+<<<<<<< HEAD
     "react-native-material-menu": "^0.4.2",
     "react-native-paper": "^2.4.0",
     "react-native-popup-menu": "^0.14.2",
@@ -20,6 +24,22 @@
     "react-native-select-multiple": "^1.2.0",
     "react-native-selection-menu": "0.0.1",
     "react-native-star-rating": "^1.1.0",
+=======
+    "react-native-datepicker": "^1.7.2",
+    "react-native-edit-text": "0.0.6",
+    "react-native-elements": "^0.19.1",
+    "react-native-emoji-selector": "^0.1.6",
+    "react-native-floating-action": "^1.13.0",
+    "react-native-floating-action-button": "0.0.6",
+    "react-native-material-menu": "^0.4.2",
+    "react-native-material-ripple": "^0.8.0",
+    "react-native-modal-datetime-picker": "^6.0.0",
+    "react-native-paper": "^2.4.0",
+    "react-native-popup-menu": "^0.14.2",
+    "react-native-randombytes": "^2.3.0",
+    "react-native-selection-menu": "0.0.1",
+    "react-native-vector-icons": "^6.1.0",
+>>>>>>> 36fa7865bc0b0d8a9d8b499912a4da43a4fc991e
     "react-navigation": "^3.0.9",
     "react-navigation-material-bottom-tabs": "^1.0.0"
   },
