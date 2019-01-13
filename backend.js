@@ -69,7 +69,7 @@ export function goingToEvent(eventID) {
     }).then((responseJson) => {
         return responseJson;
     }).catch((error) => {
-        console.error(error);
+        console.log(error);
     });
 }
 export function isGoing(eventID) {
@@ -90,7 +90,7 @@ export function notGoingToEvent(eventID) {
     }).then((responseJson) => {
         return responseJson;
     }).catch((error) => {
-        console.error(error);
+        console.log(error);
     });
 }
 

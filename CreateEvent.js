@@ -153,7 +153,6 @@ export default class CreateEvent extends React.Component {
                 </View>
                 <View style={{ marginTop: 50, marginLeft: 50, marginRight: 50 }}>
                     <Button
-
                         onPress={() => { this.create() }}
                         title="Create!"
                         color="#841584"
@@ -163,8 +162,13 @@ export default class CreateEvent extends React.Component {
         )
     }
     async create() {
-        await createEvent(this.state.position.latitude, this.state.position.longitude, this.state.title, this.state.emoji, this.state.category, this.state.time, this.state.description);
-        this.props.navigation.navigate('Map', { refresh: true })
+      if (!this.state.position) {
+        ToastAndroid.show('Please choose a location', ToastAndroid.SHORT);
+        return;
+      }
+      
+      await createEvent(this.state.position.latitude, this.state.position.longitude, this.state.title, this.state.emoji, this.state.category, this.state.time, this.state.description);
+      this.props.navigation.navigate('Map', { refresh: true })
     }
 }
 const styles = StyleSheet.create({
