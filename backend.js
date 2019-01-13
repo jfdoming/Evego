@@ -10,7 +10,7 @@ export function getEvents() {
             console.log("RESPONSE", responseJson)
             return responseJson;
         }).catch((error) => {
-            console.error(error);
+            console.log(error);
         });
 }
 
@@ -29,7 +29,7 @@ export function getEventDetails(eventID) {
             console.log("RESPONSE", responseJson)
             return responseJson;
         }).catch((error) => {
-            console.error(error);
+            console.log(error);
         });
 }
 
@@ -53,7 +53,7 @@ export function createEvent(latitude, longitude, name, emoji, category, startTim
         .then((responseJson) => {
             return responseJson;
         }).catch((error) => {
-            console.error(error);
+            console.log(error);
         });
 }
 
@@ -71,6 +71,6 @@ export function goingToEvent(eventID) {
         .then((responseJson) => {
             return responseJson;
         }).catch((error) => {
-            console.error(error);
+            console.log(error);
         });
 }

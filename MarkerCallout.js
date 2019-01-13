@@ -25,6 +25,10 @@ export default class MarkerCallout extends React.Component {
       return <Text>Loading...</Text>;
     }
     
+    if (!this.state.data) {
+      return <Text>No connection</Text>;
+    }
+    
     let pluralism = this.state.data.going == 1 ? "person is" : "people are";
     
     return (

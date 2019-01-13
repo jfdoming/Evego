@@ -39,8 +39,8 @@ export default class InfoCard extends React.Component {
     }
     
     return (
-      <Animated.View style={{backgroundColor: "transparent", width: "100%", height: "35%", padding: 5, position: "absolute", bottom: slideAnim, left: 0}}>
-        <View style={{elevation: 20, backgroundColor: "white", borderRadius: 10, width: "100%", height: "100%", padding: 10}}>
+      <Animated.View style={{backgroundColor: "transparent", width: "100%", height: "35%", padding: 10, position: "absolute", bottom: slideAnim, left: 0}}>
+        <View style={{elevation: 20, backgroundColor: "white", borderRadius: 10, width: "100%", height: "100%", padding: 20}}>
           <MarkerCallout id={calloutId}/>
         </View>
       </Animated.View>
