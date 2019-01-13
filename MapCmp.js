@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { Text, View } from 'react-native';
 import { MapView } from 'expo';
 Marker = MapView.Marker;
 import { getEvents } from './backend';
@@ -11,14 +11,15 @@ export default class MapCmp extends React.Component {
     this.state = {
       isLoading: true,
       markers: [],
-      location: { latitude: 0, longitude: 0 }
+      location: { latitude: 0, longitude: 0 },
+      loaded: false
     };
   }
-  
+
   onRegionChange = (region) => {
-    this.setState({location: region});
+    this.setState({ location: region });
   }
-  
+
   parsePointData(data) {
     return {
       emoji: data.emoji,
@@ -50,15 +51,24 @@ export default class MapCmp extends React.Component {
     console.log(status)
     if (status !== 'granted') {
       this.setState({
-        errorMessage: 'Permission to access location was denied',
+        location: { latitude: 20, longitude: -40 },
+        loaded: true
       });
+      return;
     }
     console.log(this.state, "waiting...")
     let location = await Location.getCurrentPositionAsync({});
     console.log("test", location)
-    this.setState({ location: location.coords });
+    this.setState({ location: location.coords, loaded: true });
   };
   render() {
+    if (!this.state.loaded) {
+      return (<View>
+        <Text>
+          Loading...
+        </Text>
+      </View>)
+    }
     console.log("render:", this.state.location)
     return (
       <MapView
