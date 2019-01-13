@@ -30,7 +30,8 @@ export default class MapCmp extends React.Component {
       markers: [],
       location: { latitude: 44.05724341765843, longitude: -78.1502691283822 },
       loaded: false,
-      add: false
+      add: false,
+      propsReload: false
     };
 
     notificationStream((event) => {
@@ -40,7 +41,9 @@ export default class MapCmp extends React.Component {
       } else {
         console.log('no perms for notification')
       }
-      this.setState((prevState) => { markers: [...prevState.markers, this.parsePointData(event)] });
+      this.setState((prevState) => {
+        return { ...prevState, markers: [...prevState.markers, this.parsePointData(event)], propsReload: true };
+      });
     });
   }
 
@@ -96,7 +99,8 @@ export default class MapCmp extends React.Component {
   };
 
   render() {
-    if (this.props.reload) {
+    if (this.props.reload || this.state.propsReload) {
+      this.state.propsReload = false;
       this.state.isLoading = true;
       this.state.markers = [];
       this.loadMarkers();
