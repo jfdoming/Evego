@@ -196,7 +196,6 @@ class NewScreen extends React.Component {
 }
 
 const TabNavigator = createBottomTabNavigator({
-  'List View': ListScreen,
   Home: HomeScreen,
   Preferences: DetailsScreen
 }, {
