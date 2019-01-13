@@ -1,11 +1,13 @@
 import React from 'react';
 import { Text, View, ActivityIndicator, StyleSheet } from 'react-native';
+import { Callout } from 'react-native-maps';
 import { MapView } from 'expo';
 Marker = MapView.Marker;
 import { getEvents } from './backend';
 import CreateEvent from './CreateEvent';
 import { Constants, Location, Permissions } from 'expo';
 import MarkerCallout from "./MarkerCallout";
+import MarkerWrapper from "./MarkerWrapper";
 
 import { Ionicons } from '@expo/vector-icons';
 import FloatingActionButton from 'react-native-floating-action-button';
@@ -92,17 +94,7 @@ export default class MapCmp extends React.Component {
             longitudeDelta: 0.0421,
           }}
         >
-          {this.state.markers.map((marker, index) => {
-            return (
-              <Marker
-                key={marker.id}
-                coordinate={marker.coordinate}
-              >
-                <Text style={{ fontSize: 20 }}>{marker.emoji}</Text>
-                <MarkerCallout id={marker.id}/>
-              </Marker>
-            );
-          })}
+          <MarkerWrapper markers={this.state.markers}/>
         </MapView>
         <View style={styles.actions}>
           <FloatingActionButton style={{ position: 'absolute' }}
