@@ -7,6 +7,8 @@ import { Constants, Location, Permissions } from 'expo';
 import { MapView } from 'expo';
 import { createEvent } from './backend';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
+import { getDateString } from "./datetime";
+
 export default class CreateEvent extends React.Component {
     constructor(props) {
         super(props);
@@ -122,15 +124,21 @@ export default class CreateEvent extends React.Component {
                 <View style={{ marginTop: 25, marginLeft: 50, marginRight: 50 }}>
                     <Button
 
-                        onPress={function () {
+                        onPress={() => {
                             TimePickerAndroid.open({
                                 hour: 14,
                                 minute: 0,
                                 is24Hour: false, // Will display '2 PM'
-                            }).then(function (action, hour, minute) {
-                                this.setState({ time: hour + ":" + minute });
-                            }.bind(this))
-                        }.bind(this)}
+                            }).then((payload) => {
+                              if (payload.action == TimePickerAndroid.dismissedAction) {
+                                return;
+                              }
+                              let date = new Date();
+                              date.setHours(payload.hour);
+                              date.setMinutes(payload.minute);
+                              this.setState({ time: getDateString(date) });
+                            })
+                        }}
                         title="Pick Time"
                         color="#841584"
                     />
