@@ -4,28 +4,34 @@ import { MapView } from 'expo';
 Marker = MapView.Marker;
 import { getEvents } from './backend';
 import { Constants, Location, Permissions } from 'expo';
+
 export default class MapCmp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       isLoading: true,
       markers: [],
-      location: { lat: 0, long: 0 }
+      location: { latitude: 0, longitude: 0 }
     };
   }
+  
+  onRegionChange = (region) => {
+    this.setState({location: region});
+  }
+  
   parsePointData(data) {
     return {
       title: data.emoji,
       description: "",
       id: data.id,
       coordinate: {
-        latitude: data.lat,
-        longitude: data.long
+        latitude: data["lat"],
+        longitude: data["long"]
       }
     }
   }
   componentDidMount() {
-    //  this._getLocationAsync();
+    this._getLocationAsync();
     return getEvents().then((jsonData) => {
       this.setState({
         isLoading: false,
@@ -49,19 +55,19 @@ export default class MapCmp extends React.Component {
     console.log(this.state, "waiting...")
     let location = await Location.getCurrentPositionAsync({});
     console.log("test", location)
-    this.setState({ location: location });
+    this.setState({ location: location.coords });
   };
   render() {
+    console.log("render:", this.state.location)
     return (
       <MapView
         style={{ flex: 1 }}
-        initialRegion={{
-          latitude: this.state.location.lat,
-          longitude: this.state.location.long,
+        region={{
+          latitude: this.state.location.latitude,
+          longitude: this.state.location.longitude,
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
         }}
-        onRegionChange={this.onRegionChange}
       >
         {this.state.markers.map((marker, index) => {
           return (
