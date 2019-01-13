@@ -31,7 +31,7 @@ export default class MarkerCallout extends React.Component {
         <Text style={{ fontWeight: "bold", fontSize: 24 }}>{this.state.data.name + "\n"}</Text>
         <Text>{this.state.data.description + "\n\n"}</Text>
         <Text>{`${this.state.data.going} ${pluralism} going`}</Text>
-        <Text>{getTimeUntil(new Date(this.state.data.time)) + "\n\n"}</Text>
+        <Text>{`Starts at ${this.state.data.time}`}</Text>
         <TouchableOpacity style={{
           alignItems: 'center',
           justifyContent: 'center',

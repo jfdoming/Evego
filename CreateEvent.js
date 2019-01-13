@@ -41,8 +41,9 @@ export default class CreateEvent extends React.Component {
     };
     render() {
         if (this.state.emojiTime) {
-            return (<View>
-                <EmojiSelector style={styles.emojiSelector}
+            return (<View renderToHardwareTextureAndroid={true}>
+                <EmojiSelector
+                    style={styles.emojiSelector}
                     onEmojiSelected={emoji => this.setState({ emojiTime: false, emoji: emoji })}
                 />
             </View>);
@@ -50,7 +51,6 @@ export default class CreateEvent extends React.Component {
         if (this.state.chooseLocation) {
             return (<MapView style={{ height: '100%', width: '100%' }}
                 onPress={(coordinate) => {
-                    console.log("coord", coordinate.nativeEvent.coordinate)
                     this.setState({
                         chooseLocation: false,
                         position: coordinate.nativeEvent.coordinate
@@ -92,7 +92,7 @@ export default class CreateEvent extends React.Component {
                         <Button
                             color="#841584"
                             title={"Emoji: " + this.state.emoji}
-                            onPress={() => { console.log("YES"); this.setState({ emojiTime: true }) }}>
+                            onPress={() => { this.setState({ emojiTime: true }) }}>
                             <Text></Text>
                         </Button>
                     </View>

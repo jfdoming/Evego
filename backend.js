@@ -7,7 +7,6 @@ const goingEvents = [];
 export function getEvents() {
     return fetch(ip).then((response) => response.json())
         .then((responseJson) => {
-            console.log("RESPONSE", responseJson)
             return responseJson;
         }).catch((error) => {
             console.error(error);
@@ -26,7 +25,6 @@ export function getEventDetails(eventID) {
         })
     }).then((response) => response.json())
         .then((responseJson) => {
-            console.log("RESPONSE", responseJson)
             return responseJson;
         }).catch((error) => {
             console.error(error);

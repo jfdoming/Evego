@@ -60,7 +60,6 @@ export default class MapCmp extends React.Component {
       this.setState({
         isLoading: false,
         markers: jsonData.map(obj => {
-          console.log(this.parsePointData(obj))
           return this.parsePointData(obj);
         })
       }, function () {
@@ -93,14 +92,13 @@ export default class MapCmp extends React.Component {
     }
     if (this.state.add) {
       return (<CreateEvent callback={() => {
-        console.log("here");
         this.setState({ add: false })
       }} />);
     }
-    console.log("render:", this.state.location)
     return (
       <>
         <MapView
+          renderToHardwareTextureAndroid={true}
           style={{ flex: 1 }}
           region={{
             latitude: this.state.location.latitude,
