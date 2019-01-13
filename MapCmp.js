@@ -4,6 +4,7 @@ import { MapView } from 'expo';
 Marker = MapView.Marker;
 import { getEvents } from './backend';
 import { Constants, Location, Permissions } from 'expo';
+import MarkerCallout from "./MarkerCallout";
 
 export default class MapCmp extends React.Component {
   constructor(props) {
@@ -32,7 +33,7 @@ export default class MapCmp extends React.Component {
     }
   }
   componentDidMount() {
-    this._getLocationAsync();
+    this.getLocationAsync();
     return getEvents().then((jsonData) => {
       this.setState({
         isLoading: false,
@@ -45,21 +46,20 @@ export default class MapCmp extends React.Component {
       });
     })
   }
-  _getLocationAsync = async () => {
+  
+  getLocationAsync = async () => {
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
-    console.log(status)
     if (status !== 'granted') {
       this.setState({
         errorMessage: 'Permission to access location was denied',
       });
     }
-    console.log(this.state, "waiting...")
+    
     let location = await Location.getCurrentPositionAsync({});
-    console.log("test", location)
     this.setState({ location: location.coords });
   };
+  
   render() {
-    console.log("render:", this.state.location)
     return (
       <MapView
         style={{ flex: 1 }}
@@ -75,10 +75,9 @@ export default class MapCmp extends React.Component {
             <Marker
               key={marker.id}
               coordinate={marker.coordinate}
-              title={marker.title}
-              description={marker.description}
             >
               <Text style={{ fontSize: 20 }}>{marker.emoji}</Text>
+              <MarkerCallout id={marker.id}/>
             </Marker>
           );
         })}
