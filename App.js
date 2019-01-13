@@ -1,9 +1,10 @@
-
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Button, Alert } from 'react-native';
 import MapCmp from './MapCmp';
 import { getEvents } from './backend';
-export default class App extends React.Component {
+import { createBottomTabNavigator, createAppContainer} from "react-navigation";
+
+export class HomeScreen extends React.Component {
 
   constructor(props) {
     super(props);
@@ -33,10 +34,54 @@ export default class App extends React.Component {
         <View style={{ flex: 1, paddingTop: 20 }}>
           <Text>{JSON.stringify(this.state.dataSource)}</Text>
         </View>
+	<Button
+ 	 onPress={() => {
+	    Alert.alert('You tapped the button!');
+	  }}
+ 	 title="Press Me ya"
+	/>
       </>
     );
   }
 }
+
+class DetailsScreen extends React.Component {
+  render() {
+    return (
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Text>Details Screen</Text>
+        <Button
+          title="Go to Details... again"
+          onPress={() => this.props.navigation.navigate('List View')}
+        />
+      </View>
+    );
+  }
+}
+
+class ListScreen extends React.Component {
+  render() {
+    return (
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Text>Details Screen</Text>
+        <Button
+          title="I'm at List"
+          onPress={() => this.props.navigation.navigate('Preferences')}
+        />
+      </View>
+    );
+  }
+}
+
+
+const TabNavigator = createBottomTabNavigator({
+  'List View': ListScreen,
+  Home: HomeScreen,
+  Preferences: DetailsScreen,
+},{
+    initialRouteName: 'Home'});
+
+export default createAppContainer(TabNavigator);
 
 const styles = StyleSheet.create({
   container: {
