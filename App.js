@@ -15,7 +15,6 @@ export class MapScreen extends React.Component {
   }
 
   ud() {
-    console.log("wtf")
     this.setState({ forceUpdate: !this.state.forceUpdate })
   }
   showInfoCard = (id) => {
@@ -42,8 +41,9 @@ export class MapScreen extends React.Component {
           <InfoCard id={this.state.infoId} />
         </View>
         <ActionButton
-          buttonColor="rgba(231,76,60,1)"
+          buttonColor="rgba(69,69,69,0.8)"
           onPress={() => this.props.navigation.navigate('Event')}
+          hideShadow={false}
         />
 
 
@@ -57,42 +57,109 @@ const HomeScreen = createStackNavigator({ Map: { screen: MapScreen, navigationOp
 class DetailsScreen extends React.Component {
   constructor(props) {
     super(props);
-  
+
     this.state = {
-      buttonColor: 'red',
+      buttonColor1: 'black',
+      buttonColor2: 'black',
+      buttonColor3: 'black',
+      buttonColor4: 'black',
+      buttonColor5: 'black',
+      buttonColor6: 'black',
+      buttonColor7: 'black',
+      buttonColor8: 'black',
+      buttonColor9: 'black',
+      buttonColor10: 'black',
+      buttonColor11: 'black',
+      buttonColor12: 'black',
     };
   }
-  
+
   render() {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Preferences</Text>
+        <Text style={{ marginTop: 10, fontSize: 25, marginBottom: 10 }}>Preferences</Text>
         <Button
-          title="sports"
+          title="Films"
           color={this.state.buttonColor1}
           onPress={() => {
-            this.setState({ buttonColor1: 'blue' }); 
+            this.setState({ buttonColor1: '#F5D21D' });
           }}
         />
         <Button
-          title="geese"
+          title="Novels"
           color={this.state.buttonColor2}
           onPress={() => {
-            this.setState({ buttonColor2: 'blue' }); 
+            this.setState({ buttonColor2: '#F5D21D' });
           }}
         />
         <Button
-          title="snowball fight"
+          title="Astronomy"
           color={this.state.buttonColor3}
           onPress={() => {
-            this.setState({ buttonColor3: 'blue' }); 
+            this.setState({ buttonColor3: '#F5D21D' });
           }}
         />
         <Button
-          title="screaming for 1 minute"
+          title="Video Games"
           color={this.state.buttonColor4}
           onPress={() => {
-            this.setState({ buttonColor4: 'blue' }); 
+            this.setState({ buttonColor4: '#F5D21D' });
+          }}
+        />
+        <Button
+          title="Environment"
+          color={this.state.buttonColor5}
+          onPress={() => {
+            this.setState({ buttonColor5: '#F5D21D' });
+          }}
+        />
+        <Button
+          title="Meetup"
+          color={this.state.buttonColor6}
+          onPress={() => {
+            this.setState({ buttonColor6: '#F5D21D' });
+          }}
+        />
+        <Button
+          title="Tech"
+          color={this.state.buttonColor7}
+          onPress={() => {
+            this.setState({ buttonColor7: '#F5D21D' });
+          }}
+        />
+        <Button
+          title="Business"
+          color={this.state.buttonColor8}
+          onPress={() => {
+            this.setState({ buttonColor8: '#F5D21D' });
+          }}
+        />
+        <Button
+          title="Arts"
+          color={this.state.buttonColor9}
+          onPress={() => {
+            this.setState({ buttonColor9: '#F5D21D' });
+          }}
+        />
+        <Button
+          title="Sports"
+          color={this.state.buttonColor10}
+          onPress={() => {
+            this.setState({ buttonColor10: '#F5D21D' });
+          }}
+        />
+        <Button
+          title="Food"
+          color={this.state.buttonColor11}
+          onPress={() => {
+            this.setState({ buttonColor11: '#F5D21D' });
+          }}
+        />
+        <Button
+          title="Science"
+          color={this.state.buttonColor12}
+          onPress={() => {
+            this.setState({ buttonColor12: '#F5D21D' });
           }}
         />
       </View>
@@ -153,8 +220,10 @@ const TabNavigator = createBottomTabNavigator({
       },
     }),
     tabBarOptions: {
-      activeTintColor: 'tomato',
-      inactiveTintColor: 'gray',
+      activeTintColor: '#F5D21D',
+      inactiveTintColor: '#AAAAAA',
+      inactiveBackgroundColor: '#000000',
+      activeBackgroundColor: '#000000'
     },
   });
 
