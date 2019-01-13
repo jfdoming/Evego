@@ -20,6 +20,7 @@ export default class CreateEvent extends React.Component {
             emojiTime: false,
             category: "category",
             emoji: "⚽",
+            location: { latitude: 44.05724341765843, longitude: -78.1502691283822 },
             chooseLocation: false
         }
     }

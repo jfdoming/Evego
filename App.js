@@ -11,11 +11,11 @@ import { Ionicons } from '@expo/vector-icons';
 export class MapScreen extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { isLoading: true, infoId: -1, forceUpdate: false }
+    this.state = { isLoading: true, infoId: -1, forceUpdate: false, reloadNow: false }
   }
 
-  ud() {
-    this.setState({ forceUpdate: !this.state.forceUpdate })
+  ud = () => {
+    this.setState((prevState) => ({ forceUpdate: !prevState.forceUpdate, reloadNow: true }))
   }
   showInfoCard = (id) => {
     this.setState({ infoId: id });
@@ -28,13 +28,19 @@ export class MapScreen extends React.Component {
     // }
   }
   render() {
+    let reloadNow = false;
+    if (this.state.reloadNow) {
+      reloadNow = true;
+      this.state.reloadNow = false;
+    }
+    
     return (
       <View style={{ display: "flex", flexFlow: "column", height: "100%" }}>
         <StatusBar hidden />
         <View style={{ position: "relative", flexGrow: 1, flexShrink: 1, flexBasis: "auto", zIndex: -1 }}>
-          <MapCmp showInfoCard={this.showInfoCard}></MapCmp>
+          <MapCmp showInfoCard={this.showInfoCard} reload={reloadNow}></MapCmp>
           <TouchableWithoutFeedback
-            onPress={() => { this.ud() }}
+            onPress={this.ud}
           >
             <Ionicons style={{ position: 'absolute', top: 10, right: 10 }} name="md-refresh" size={32} color="grey" />
           </TouchableWithoutFeedback>

@@ -36,20 +36,12 @@ export default class MapCmp extends React.Component {
     notificationStream((event) => {
       if (this.state.status === 'granted') {
         console.log("new event:", event);
-        Expo.Notifications.presentLocalNotificationAsync({title: event.name, body: event.description});
+        Expo.Notifications.presentLocalNotificationAsync({title: event.name || "[no title]", body: event.description || "[no description]"});
       } else {
         console.log('no perms for notification')
       }
-      this.state.markers.push(this.parsePointData(event));
-      this.setState({ markers: this.state.markers });
+      this.setState((prevState) => { markers: [...prevState.markers, this.parsePointData(event)] });
     });
-  }
-
-  onRegionChange = (region) => {
-    this.setState({ location: region });
-  }
-  shouldComponentUpdate() {
-    return !this.state.loaded;
   }
 
   parsePointData(data) {
@@ -64,9 +56,7 @@ export default class MapCmp extends React.Component {
       }
     }
   }
-  componentDidMount() {
-    this.getLocationAsync();
-    this.getNotificationsAsync();
+  loadMarkers = () => {
     return getEvents().then((jsonData) => {
       this.setState({
         isLoading: false,
@@ -76,7 +66,12 @@ export default class MapCmp extends React.Component {
       }, function () {
 
       });
-    })
+    });
+  }
+  componentDidMount() {
+    this.getLocationAsync();
+    this.getNotificationsAsync();
+    return this.loadMarkers();
   }
   getNotificationsAsync = async () => {
        let { status } = await Permissions.askAsync(Permissions.USER_FACING_NOTIFICATIONS);
@@ -84,9 +79,8 @@ export default class MapCmp extends React.Component {
        this.setState({ status: status });
   }
   getLocationAsync = async () => {
+    console.log("getting location")
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
- 
-    
     
     if (status !== 'granted') {
       this.setState({
@@ -97,10 +91,17 @@ export default class MapCmp extends React.Component {
     }
 
     let location = await Location.getCurrentPositionAsync({});
+    console.log(location);
     this.setState({ location: location.coords, loaded: true });
   };
 
   render() {
+    if (this.props.reload) {
+      this.state.isLoading = true;
+      this.state.markers = [];
+      this.loadMarkers();
+    }
+    console.log("hi")
     if (!this.state.loaded) {
       return (
         <View style={[styles.container, styles.horizontal]}>
