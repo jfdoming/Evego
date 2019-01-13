@@ -5,6 +5,7 @@ import EmojiSelector from 'react-native-emoji-selector'
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import { Constants, Location, Permissions } from 'expo';
 import { MapView } from 'expo';
+import { ToastAndroid } from "react-native";
 import { createEvent } from './backend';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import { getDateString } from "./datetime";

@@ -36,13 +36,14 @@ export default class MapCmp extends React.Component {
     notificationStream((event) => {
       if (this.state.status === 'granted') {
         console.log("new event:", event);
-        Expo.Notifications.presentLocalNotificationAsync(<Text>{event}</Text>)
+        Expo.Notifications.presentLocalNotificationAsync({title: event.name, body: event.description})
         this.state.markers.push(this.parsePointData(event));
         this.setState({ markers: this.state.markers });
       } else {
         console.log('no perms for notification')
         this.state.markers.push(this.parsePointData(event));
         this.setState({ markers: this.state.markers });
+        this.forceUpdate();
       }
     });
   }
@@ -68,6 +69,7 @@ export default class MapCmp extends React.Component {
   }
   componentDidMount() {
     this.getLocationAsync();
+    this.getNotificationsAsync();
     return getEvents().then((jsonData) => {
       this.setState({
         isLoading: false,
@@ -79,11 +81,16 @@ export default class MapCmp extends React.Component {
       });
     })
   }
-
+  getNotificationsAsync = async () => {
+       let { status } = await Permissions.askAsync(Permissions.USER_FACING_NOTIFICATIONS);
+       console.log("got notification perms:" + status)
+       this.setState({ status: status });
+  }
   getLocationAsync = async () => {
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
-    // let { statusStatus } = await Permissions.askAsync(Permissions.REMOTE_NOTIFICATIONS);
-    this.setState({ status: 'no' });
+ 
+    
+    
     if (status !== 'granted') {
       this.setState({
         location: { latitude: 20, longitude: -40 },
@@ -112,7 +119,6 @@ export default class MapCmp extends React.Component {
     return (
       <>
         <MapView
-          renderToHardwareTextureAndroid={true}
           style={{ flex: 1 }}
           region={{
             latitude: this.state.location.latitude,
