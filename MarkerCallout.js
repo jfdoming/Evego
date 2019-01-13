@@ -33,7 +33,7 @@ export default class MarkerCallout extends React.Component {
     return (
       <>
         <Text style={{ fontWeight: "bold", fontSize: 24 }}>{this.state.data.name + "\n"}</Text>
-        <Text>{this.state.data.description + "\n\n"}</Text>
+        <Text style={{ width: "60%" }}>{this.state.data.description + "\n\n"}</Text>
         <Text>{`${this.state.data.going} ${pluralism} going`}</Text>
         <Text>{getTimeUntil(new Date(this.state.data.time)) + "\n\n"}</Text>
         <TouchableOpacity style={{
