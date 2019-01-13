@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, Button, Alert } from 'react-native';
 import MapCmp from './MapCmp';
 import { getEvents } from './backend';
-import { createBottomTabNavigator, createAppContainer} from "react-navigation";
+import { createBottomTabNavigator, createAppContainer } from "react-navigation";
 
 export class HomeScreen extends React.Component {
 
@@ -10,17 +10,17 @@ export class HomeScreen extends React.Component {
     super(props);
     this.state = { isLoading: true }
   }
-  
+
   render() {
     return (
       <>
         <MapCmp></MapCmp>
-	<Button
- 	 onPress={() => {
-	    Alert.alert('You tapped the button!');
-	  }}
- 	 title="Press Me ya"
-	/>
+        <Button
+          onPress={() => {
+            Alert.alert('You tapped the button!');
+          }}
+          title="Press Me ya"
+        />
       </>
     );
   }
@@ -59,8 +59,9 @@ const TabNavigator = createBottomTabNavigator({
   'List View': ListScreen,
   Home: HomeScreen,
   Preferences: DetailsScreen,
-},{
-    initialRouteName: 'Home'});
+}, {
+    initialRouteName: 'Home'
+  });
 
 export default createAppContainer(TabNavigator);
 

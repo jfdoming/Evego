@@ -3,8 +3,16 @@ import { Text, View, ActivityIndicator, StyleSheet } from 'react-native';
 import { MapView } from 'expo';
 Marker = MapView.Marker;
 import { getEvents } from './backend';
+import CreateEvent from './CreateEvent';
 import { Constants, Location, Permissions } from 'expo';
-
+import { Ionicons } from '@expo/vector-icons';
+import FloatingActionButton from 'react-native-floating-action-button';
+const actions = [{
+  text: 'Create Event',
+  icon: require('./images/add.png'),
+  name: 'bt_accessibility',
+  position: 2
+}];
 export default class MapCmp extends React.Component {
   constructor(props) {
     super(props);
@@ -69,28 +77,42 @@ export default class MapCmp extends React.Component {
     }
     console.log("render:", this.state.location)
     return (
-      <MapView
-        style={{ flex: 1 }}
-        region={{
-          latitude: this.state.location.latitude,
-          longitude: this.state.location.longitude,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
-        }}
-      >
-        {this.state.markers.map((marker, index) => {
-          return (
-            <Marker
-              key={marker.id}
-              coordinate={marker.coordinate}
-              title={marker.title}
-              description={marker.description}
-            >
-              <Text style={{ fontSize: 20 }}>{marker.emoji}</Text>
-            </Marker>
-          );
-        })}
-      </MapView>
+      <>
+        <MapView
+          style={{ flex: 1 }}
+          region={{
+            latitude: this.state.location.latitude,
+            longitude: this.state.location.longitude,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
+          }}
+        >
+          {this.state.markers.map((marker, index) => {
+            return (
+              <Marker
+                key={marker.id}
+                coordinate={marker.coordinate}
+                title={marker.title}
+                description={marker.description}
+              >
+                <Text style={{ fontSize: 20 }}>{marker.emoji}</Text>
+              </Marker>
+            );
+          })}
+        </MapView>
+        <View style={styles.actions}>
+          <FloatingActionButton style={{ position: 'absolute' }}
+            iconName="plus"
+            iconType="feather"
+            iconColor="white"
+            backgroundColor="#C3C3C3"
+            textDisable
+            onPress={() => {
+              console.log("onPress :O");
+            }}
+          />
+        </View>
+      </>
     );
   }
 }
@@ -103,5 +125,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     padding: 10
+  },
+  actions: {
+    position: 'absolute',
+    bottom: 85,
+    right: 30,
+    zIndex: 10,
   }
 });
