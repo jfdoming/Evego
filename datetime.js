@@ -2,30 +2,41 @@ function getTimeBetween(from, to) {
   return to.getTime() - from.getTime();
 }
 
-function getDeltaString(from, to) {
-  let delta = getTimeBetween(from, to);
-  
+function convertDeltaToString(delta) {
   // round to an hour
-  if (delta > 3000) {
-    return `In ${Math.round(delta/3600)} hours`;
+  if (delta > 3000000) {
+    let time = Math.round(delta / 3600000);
+    if (time === 1) {
+      return "Starts in about an hour"
+    }
+    return `Starts in about ${time} hours`;
   }
   
   // round to a minute
-  if (delta > 60) {
-    return `In ${Math.round(delta/60)} minutes`;
+  if (delta > 60000) {
+    let time = Math.round(delta / 60000);
+    return `Starts in ${time} minute${time > 1 ? "s" : ""}`;
   }
   
-  if (delta <= 0) {
-    return "Now";
+  // the tension is building!
+  if (delta > 0) {
+    return `Starts in less than a minute`;
   }
   
-  return `In ${delta} seconds`;
+  // give people some leeway to arrive
+  if (delta > -120000) {
+    return "Starting now";
+  }
+  
+  // it happened a while ago
+  return `Started ${Math.round(-delta / 60000)} minutes ago`;
 }
 
-function getTimeUntil(date) {
-  return getDeltaString(new Date(), date);
+export function getTimeUntil(date) {
+  let delta = getTimeBetween(new Date(), date);
+  return convertDeltaToString(delta);
 }
 
-function getDateString(date) {
+export function getDateString(date) {
   return date.toISOString();
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, Alert } from 'react-native';
+import { StyleSheet, Text, View, Button, Alert, StatusBar } from 'react-native';
 import MapCmp from './MapCmp';
 import { getEvents } from './backend';
 import { createBottomTabNavigator, createAppContainer } from "react-navigation";
@@ -14,6 +14,7 @@ export class HomeScreen extends React.Component {
   render() {
     return (
       <>
+        <StatusBar hidden />
         <MapCmp></MapCmp>
         <Button
           onPress={() => {

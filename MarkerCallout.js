@@ -2,6 +2,7 @@ import React from 'react';
 import { Text, View } from 'react-native';
 import { MapView } from 'expo';
 import { getEventDetails } from "./backend";
+import { getTimeUntil } from "./datetime";
 
 export default class MarkerCallout extends React.Component {
   constructor(props) {
@@ -31,6 +32,7 @@ export default class MarkerCallout extends React.Component {
           <Text style={{fontWeight: "bold"}}>{this.state.data.name + "\n"}</Text>
           <Text>{this.state.data.description + "\n\n"}</Text>
           <Text>{`${this.state.data.going} ${pluralism} going`}</Text>
+          <Text>{getTimeUntil(new Date(this.state.data.time))}</Text>
         </View>
       </MapView.Callout>
     );
