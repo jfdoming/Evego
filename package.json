@@ -13,7 +13,7 @@
     "expo-google-sign-in": "^2.0.0",
     "native-base": "^2.15.2",
     "react": "16.5.0",
-    "react-native": "^0.70.6",
+    "react-native": "^0.72.6",
     "react-native-action-button": "^2.8.5",
     "react-native-crypto": "^2.1.2",
     "react-native-material-menu": "^0.4.2",
